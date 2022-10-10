@@ -1,0 +1,5 @@
+---
+ohmyzsh_install_url: |
+  https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+powerlevel10k_theme_url: https://github.com/romkatv/powerlevel10k.git
+powerlevel10k_theme_version: v1.16.1
