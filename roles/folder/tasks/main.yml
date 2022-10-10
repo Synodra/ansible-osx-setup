@@ -1,0 +1,12 @@
+---
+- name: Create my document foldfer architecture
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: no
+    mode: 0755
+  loop:
+    - "{{ ansible_env.HOME }}/Documents/1-Projets"
+    - "{{ ansible_env.HOME }}/Documents/2-Area-of-Resposability"
+    - "{{ ansible_env.HOME }}/Documents/3-Ressources"
+    - "{{ ansible_env.HOME }}/Documents/4-Archives"

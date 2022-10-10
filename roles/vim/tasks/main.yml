@@ -1,0 +1,58 @@
+---
+# update vim config files with my config
+- name: Ensure .vim/{autoload,bundle} directory exists
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: no
+    mode: 0750
+  loop: "{{ vim_directory }}"
+
+- name: Copy vim settings (1/2)
+  copy:
+    src: "vim/.vimrc"
+    dest: "{{ ansible_env.HOME }}/.vimrc"
+    owner: "{{ username }}"
+    group: "{{ group }}"
+    mode: 0750
+
+- name: Copy vim settings (2/2)
+  copy:
+    src: "vim/init"
+    dest: "{{ ansible_env.HOME }}/.vim"
+    owner: "{{ username }}"
+    group: "{{ group }}"
+    mode: 0750
+
+# install vim plug
+- name: Verify that autoload folder exists
+  stat:
+    path: "{{ ansible_env.HOME }}/.vim/autoload"
+  register: vim_autoload_details
+
+- name: Ensure vim-plug is in place
+  get_url:
+    dest: "{{ ansible_env.HOME }}/.vim/autoload/plug.vim"
+    url: "{{ vim_plug_url }}"
+  when: vim_autoload_details.stat.exists
+
+# download plugins with vim plugs
+- name: Perform the plugins installation with PlugInstall 
+  shell: "vim -e -i NONE -c 'PlugInstall' -c 'PlugClean' -c 'qa'"
+  ignore_errors: true
+  when: vim_autoload_details.stat.exists
+
+# download to-do.txt plugin
+- name: Download to-do.txt in temporary location
+  git:
+    repo: "{{ todo_txt_url }}"
+    dest: "$TMPDIR/git_download"
+    version: "7.3.2"
+
+- name: Copy to-do.txt plugin in vim directory
+  command: cp -R $TMPDIR/git_download/ {{ ansible_env.HOME }}/.vim
+
+- name: Clean teporary files
+  file:
+    state: absent
+    path: "$TMPDIR/git_download"

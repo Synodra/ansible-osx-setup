@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    username: antoinemayslich
+    group: staff
+    hostname: Atlantis
+  roles:
+    - preflight
+    - hostname
+    - homebrew
+    - git
+    - zsh
+    - dock
+    - ssh
+    - vim
+    - iterm
+    - vscode
+    - folder
