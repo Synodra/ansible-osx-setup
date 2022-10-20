@@ -9,16 +9,20 @@ then
 fi
 
 echo
-echo "1️⃣ Install Ansible and his dependencies"
+echo "✅  Laptop is connected to internet."
+echo
+echo "1️⃣  Install Ansible and his dependencies."
 echo
 
 # Install Xcode Command-Line Tools
 if ! xcode-select -p ; then
 	xcode-select --install
+    echo
+    echo "⚠️ Relaunch the script when xcode installation is complete."
 	exit 0
 fi
 echo
-echo "		1/6 Xcode CLI tools is ready ✅"
+echo "✅  1/5 Xcode CLI tools is ready."
 echo
 
 # Install & update Homebrew
@@ -26,37 +30,30 @@ brew --version || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/H
 brew doctor || exit $?
 brew update
 echo
-echo "		2/6 Homebrew is ready ✅"
+echo "✅  2/5 Homebrew is ready."
 echo
-
-# Install git
-# echo
-# git --version || brew install git
-# echo
-# echo "		3/5 Git is ready ✅"
 
 # Install python
 python3 --version || brew install python
 echo
-echo "		4/6 Python is ready ✅"
+echo "✅	 3/5 Python is ready."
 echo
 
 # Install Ansible
 ansible --version || brew install ansible
 echo
-echo "		5/6 Ansible is ready ✅"
+echo "✅  4/5 Ansible is ready."
 echo
 
 # Clone the repo
-git clone git@github.com:Synodra/ansible-osx-setup.git
-echo
-echo "      6/6 Git repo has been cloned ✅"
+git clone https://github.com/Synodra/ansible-osx-setup.git
 
-# echo
-# echo "2️⃣ Launch Ansible script"
-# echo
-# ansible-playbook ansible-osx-setup/playbook.yml --ask-become-pass --ask-vault-pass
-# 
-# echo
-# echo "DONE - macOS is ready 🎉"
-# echo
+if ! (git clone https://github.com/Synodra/ansible-osx-setup.git) then
+    echo
+    echo "⚠️ Git clone aborted! Repo may have already been cloned."
+fi
+echo
+echo "✅  5/5 Git repo has been cloned."
+
+echo
+echo "2️⃣  You can now configure config file & launch the ansible script."
