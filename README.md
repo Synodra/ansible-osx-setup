@@ -1,24 +1,45 @@
 # ansible-osx-setup
 
 This repo contains an Ansible script that setup an Intel based macOS Monterey.
+Inspiration commes from those repo:
+
+- [Je configure macOS avec Ansible !](https://blog.filador.fr/je-configure-macos-avec-ansible/)
+- [osx dotfile implementation](https://github.com/geerlingguy/mac-dev-playbook/blob/master/tasks/osx.yml)
+- [osx dotfile tuto](https://wilsonmar.github.io/dotfiles/)
 
 ## Installation
 
-Follow those inscrutions to launch the script aiming to setup the workstation.
+Follow those instructions to launch the workstation setup.
 
-1. Clone the repository to you local drive.
-2. Copy your encrypted ssh keys in this folder `/files/ssh`
-3. Make the setup.sh executable
+- Download script file from github
+- Make the script executable: `chmod 755 ./setup.sh`
+- Launch it: `./setup.sh`
+- Enter in the folder of the cloned repo.
+- If needed, update config & inventory files and copy ssh keys.
+- Launch the Ansible script `ansible-playbook ansible-osx-setup/playbook.yml --ask-become-pass --ask-vault-pass`
 
-    ```Shell
-    chmod 755 ./setup.sh
-    ```
+## More information about this repo
 
-4. Launch the the script
+What's gona do the pre-flight script
 
-    ```Shell
-    ./setup.sh
-    ```
+- Verify internet connection
+- Install xcode
+- Install homebrew
+- Install python
+- Install ansible
+- Clone the repo containing the ansible script
+
+What's gona do the ansible script
+
+- Update the hostname
+- Install or create new ssh keys
+- Install homebrew packages
+- Setup git
+- Install & setup iterm
+- Install & setup zsh
+- Install & setup vin
+- Install & setup vscode
+- Create my folder architecture
 
 ## Encrypt ssh key
 
@@ -36,11 +57,5 @@ ansible-vault encrypt ssh-key-name
 
 ## Testing the Playbook
 
-In order to test this script, you'll need to create a macOS VM and run the script.
-You can also use ansible test tool to verify that ansible script is executables.
-
-## See also
-
-- [Je configure macOS avec Ansible !](https://blog.filador.fr/je-configure-macos-avec-ansible/)
-- [osx dotfile implementation](https://github.com/geerlingguy/mac-dev-playbook/blob/master/tasks/osx.yml)
-- [osx dotfile tuto](https://wilsonmar.github.io/dotfiles/)
+In order to test this script, you'll need to create a macOS VM and run the script. Follow this tuto to create a MacOS VM: [How to create a Mac OS VM](https://github.com/geerlingguy/macos-virtualbox-vm)
+You can also use ansible test tool to verify that ansible script is executables with the `--check` command.

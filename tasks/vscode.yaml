@@ -1,0 +1,19 @@
+---
+- name: Install homebrew casks
+  become: false
+  homebrew_cask:
+    name: "visual-studio-code"
+    state: present
+
+- name: Add VSCode Gatekeeper Exception
+  become: false
+  command: "spctl --add /Applications/Visual\ Studio\ Code.app/"
+  changed_when: true
+  ignore_errors: true
+
+- name: Install Visual Studio Code extensions
+  become: false
+  command: code --install-extension {{ item.id | default(item) }}
+  with_items: "{{ vscode_extensions }}"
+  register: vscode_result
+  changed_when: "'already installed' not in vscode_result.stdout"

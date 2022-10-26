@@ -1,0 +1,12 @@
+---
+- name: Install iTerm2 with Homebrew
+  become: false
+  homebrew_cask:
+    name: "iterm2"
+    state: present
+
+- name: Copy iTerm2 settings
+  become: false
+  copy:
+    src: iterm/com.googlecode.iterm2.plist
+    dest: "{{ home_dir }}/Library/Preferences/com.googlecode.iterm2.plist"

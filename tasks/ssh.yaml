@@ -1,0 +1,27 @@
+---
+- name: Ensure ~/.ssh exists
+  become: false
+  file:
+    path: "{{ home_dir }}/.ssh"
+    state: directory
+    mode: 0700
+
+- name: Ensure ~/.ssh/known_hosts exists
+  become: false
+  file:
+    path: "{{ home_dir }}/.ssh/known_hosts"
+    state: touch
+    mode: 0644
+  changed_when: false
+
+- name: Copy private and public keys
+  become: false
+  copy:
+    src: "ssh/{{ item.file }}"
+    dest: "{{ home_dir }}/.ssh/{{ item.file }}"
+    owner: "{{ username }}"
+    group: "{{ group }}"
+    mode: "{{ item.mode }}"
+  with_items: "{{ ssh_key_files }}"
+
+    

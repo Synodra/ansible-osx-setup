@@ -1,0 +1,7 @@
+---
+- name: flush dns cache
+  command: dscacheutil -flushcache
+
+- name: killall dock
+  command: killall Dock
+  ignore_errors: true
