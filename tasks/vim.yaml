@@ -1,0 +1,58 @@
+---
+# Deploy VIM config files with my config
+- name: Ensure .vim/{autoload,bundle} directory exists
+  become: false
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: no
+    mode: 0750
+  with_items: "{{ vim_directory }}"
+
+- name: Copy vim dotfile 
+  become: false
+  copy:
+    src: "dotfiles/.vimrc"
+    dest: "{{ home_dir }}/.vimrc"
+    owner: "{{ username }}"
+    group: "{{ group }}"
+    mode: 0750
+
+# Install VIM Plug
+- name: Verify that autoload folder exists
+  become: false
+  stat:
+    path: "{{ home_dir }}/.vim/autoload"
+  register: vim_autoload_details
+
+- name: Ensure vim-plug is in place
+  become: false
+  get_url:
+    dest: "{{ home_dir }}/.vim/autoload/plug.vim"
+    url: "{{ vim_plug_url }}"
+  when: vim_autoload_details.stat.exists
+
+# Install plugins with vim plugs
+- name: Perform the plugins installation with PlugInstall
+  become: false
+  shell: "vim -e -i NONE -c 'PlugInstall' -c 'PlugClean' -c 'qa'"
+  ignore_errors: true
+  when: vim_autoload_details.stat.exists
+
+# Download & install to-do.txt plugin
+- name: Download to-do.txt in temporary location
+  become: false
+  git:
+    repo: "{{ todo_txt_url }}"
+    dest: "$TMPDIR/git_download"
+    version: "7.3.2"
+
+- name: Copy to-do.txt plugin in vim directory
+  become: false
+  command: cp -R $TMPDIR/git_download/ {{ home_dir }}/.vim
+
+- name: Clean teporary files
+  become: false
+  file:
+    state: absent
+    path: "$TMPDIR/git_download"

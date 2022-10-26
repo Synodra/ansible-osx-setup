@@ -1,0 +1,59 @@
+---
+- hosts: localhost
+  become: true
+
+  pre_tasks:
+    - name: 0️⃣  Load configuration (with defaults from example file)
+      ansible.builtin.include_vars: "{{ item }}"
+      loop:
+        - default.config.yaml
+        - config.yaml
+
+    - name: 0️⃣  Close any open system preference panes
+      command: osascript -e 'tell application "System Preferences" to quit'
+      changed_when: true
+
+  handlers:
+    - name: Include handlers
+      ansible.builtin.import_tasks: tasks/handlers.yaml
+
+  tasks:
+    - name: 1️⃣  Change default hostname
+      ansible.builtin.include_tasks: tasks/hostname.yaml
+      when: change_default_hostname_enable
+
+    - name: 2️⃣  Install homebrew
+      ansible.builtin.include_tasks: tasks/homebrew.yaml
+      when: homebrew_enable
+
+    - name: 3️⃣  Configure git
+      ansible.builtin.include_tasks: tasks/git.yaml
+      when: configure_git_enable
+
+    - name: 4️⃣  Install zsh
+      ansible.builtin.include_tasks: tasks/zsh.yaml
+      when: zsh_enable
+
+    - name: 5️⃣  Update dock configuration
+      ansible.builtin.include_tasks: tasks/dock.yaml
+      when: dock_enable
+
+    - name: 6️⃣  Install ssh keys
+      ansible.builtin.include_tasks: tasks/ssh.yaml
+      when: ssh_enable
+
+    - name: 7️⃣  Configure vim
+      ansible.builtin.include_tasks: tasks/vim.yaml
+      when: vim_enable
+
+    - name: 8️⃣  Install & configure iterm
+      ansible.builtin.include_tasks: tasks/iterm.yaml
+      when: iterm_install_enable
+
+    - name: 9️⃣  Install & configure VScode
+      ansible.builtin.include_tasks: tasks/vscode.yaml
+      when: vscode_install_enable
+
+    - name: 🔟  Create my folder architecture
+      ansible.builtin.include_tasks: tasks/folder_architecture.yaml
+      when: folder_architecture_enable

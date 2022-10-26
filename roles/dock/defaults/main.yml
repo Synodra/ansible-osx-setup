@@ -1,7 +1,0 @@
----
-dock_applications:
-  - "\"/Applications/System Preferences.app\""
-  - /Applications/iTerm.app
-  - /Applications/Notes.app
-  - /Applications/Reminders.app
-  - "\"/Applications/Google Chrome.app\""

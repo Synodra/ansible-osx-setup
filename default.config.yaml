@@ -1,0 +1,93 @@
+---
+# Location where configuration files will be stored.
+home_dir: '~'
+
+# Hostname configuration
+change_default_hostname_enable: false
+hostname: hostname
+username: username
+group: group
+
+# Homebrew configuration
+homebrew_enable: false
+homebrew_packages_to_install:
+  - git
+  - ansible
+  - terraform
+  - wget
+  - lsd
+  - htop
+  - bat
+  - tree
+  - fzf
+  - tmux
+  - python@3.10
+  - neofetch
+  - ssh-copy-id
+
+homebrew_casks_to_install:
+  - rectangle
+  - keka
+  - iina
+  - insomnia
+  - keepassxc
+  - google-chrome
+  - discord
+  - raspberry-pi-imager
+
+# Git configuration
+configure_git_enable: false
+git_username: git_username
+git_email: git_email@email.com
+
+# ZSH configuration
+zsh_enable: false
+
+# Dock configuration
+dock_enable: false
+dock_applications:
+  - "\"/Applications/System Preferences.app\""
+  - /Applications/Notes.app
+  - /Applications/Reminders.app
+
+# SSH Key configuration
+ssh_enable: false
+ssh_key_files:
+  - { file: "config", mode: "0644" }
+
+# VIM configuration
+vim_enable: false
+vim_directory:
+  - "{{ home_dir }}/.vim"
+  - "{{ home_dir }}/.vim/autoload"
+  - "{{ home_dir }}/.vim/bundle"
+  - "{{ home_dir }}/.vim/plugged"
+  - "{{ home_dir }}/.vim/init"
+vim_plug_url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+todo_txt_url: https://github.com/vim-scripts/todo-txt.vim.git
+
+# iTerm configuration
+iterm_install_enable: false
+
+# VScode configuration
+vscode_install_enable: false
+vscode_extensions:
+  - { name: "Solarized", id: "ryanolsonx.solarized" }
+  - { name: "Rainbow CSV", id: "mechatroner.rainbow-csv" }
+  - { name: "JSON Tools", id: "eriklynd.json-tools" }
+  - { name: "Markdown All in One", id: "yzhang.markdown-all-in-one" }
+  - { name: "todo-txt", id: "rarnoldmobile.todo-txt" }
+  - { name: "YAML", id: "redhat.vscode-yaml" }
+  - { name: "Ansible", id: "redhat.ansible" }
+  - { name: "vscode-pandoc", id: "DougFinke.vscode-pandoc" }
+  - { name: "Docker", id: "ms-azuretools.vscode-docker" }
+  - { name: "PlantUML", id: "jebbs.plantuml" }
+  - { name: "Prettier - Code formatter", id: "esbenp.prettier-vscode" }
+
+# Folder architecture configuration
+folder_architecture_enable: false
+folder_to_create:
+  - "{{ home_dir }}/Documents/1-Projets"
+  - "{{ home_dir }}/Documents/2-Area-of-Resposability"
+  - "{{ home_dir }}/Documents/3-Ressources"
+  - "{{ home_dir }}/Documents/4-Archives"

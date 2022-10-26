@@ -1,0 +1,9 @@
+---
+- name: Create my document foldfer architecture
+  become: false
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: no
+    mode: 0755
+  with_items: "{{ folder_to_create }}"
