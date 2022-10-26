@@ -46,6 +46,12 @@ ohmyzsh_install_url: |
   https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
 powerlevel10k_theme_url: https://github.com/romkatv/powerlevel10k.git
 powerlevel10k_theme_version: v1.16.1
+zsh_autosuggestions_git_url: |
+  https://github.com/zsh-users/zsh-autosuggestions
+zsh_syntax_highlighting_git_url:  |
+  https://github.com/zsh-users/zsh-syntax-highlighting.git
+zsh_completions_git_url:  |
+  https://github.com/zsh-users/zsh-completions
 
 # Dock configuration
 dock_enable: false

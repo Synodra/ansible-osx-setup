@@ -31,6 +31,24 @@
     version: "{{ powerlevel10k_theme_version }}"
   when: not powerlevel10k_folder.stat.exists
 
+- name: Install zsh-autosuggestions plugin
+  become: false
+  git:
+    repo: "{{ zsh_autosuggestions_git_url }}"
+    dest: "{{ home_dir }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+
+- name: Install zsh-autosuggestions plugin
+  become: false
+  git:
+    repo: "{{ zsh_syntax_highlighting_git_url }}"
+    dest: "{{ home_dir }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+
+- name: Install zsh-autosuggestions plugin
+  become: false
+  git:
+    repo: "{{ zsh_completions_git_url }}"
+    dest: "{{ home_dir }}/.oh-my-zsh/custom/plugins/zsh-completions"
+
 - name: Install nerd fonts 1/2
   become: false
   homebrew_tap:
