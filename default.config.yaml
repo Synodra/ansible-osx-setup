@@ -55,6 +55,8 @@ zsh_completions_git_url:  |
 
 # Dock configuration
 dock_enable: false
+dockutil_package_url: |
+  https://github.com/kcrawford/dockutil/releases/download/3.0.2/dockutil-3.0.2.pkg
 dock_applications:
   - "\"/Applications/System Preferences.app\""
   - /Applications/Notes.app

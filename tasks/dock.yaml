@@ -1,20 +1,27 @@
 ---
-- name: Install dockutil
+- name: Download dockutil package
   become: false
-  homebrew:
-    name: dockutil
-    state: present
-  notify: killall dock
+  get_url: 
+    url: "{{ dockutil_package_url }}"
+    dest: "{{ home_dir }}/Downloads/dockutil-3.0.2.pkg"
+
+- name: Install dockutil
+  become: true
+  command: "installer -pkg {{ home_dir }}/Downloads/dockutil-3.0.2.pkg -target }/.vim"
+
+- name: Delete the .pkg archive downloaded
+  become: false
+  file:
+    path: "{{ home_dir }}/Downloads/dockutil-3.0.2.pkg"
+    state: absent
 
 - name: Remove all items from the Dock
   become: false
   command: /usr/local/bin/dockutil --remove all
-  changed_when: true
   notify: killall dock
 
 - name: Set the default Dock items
   become: false
   command: "/usr/local/bin/dockutil --add {{ item }} --no-restart"
   with_items: "{{ dock_applications }}"
-  changed_when: true
   notify: killall dock
