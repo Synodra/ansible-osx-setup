@@ -27,8 +27,7 @@ echo
 
 # Install & update Homebrew
 brew --version || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew doctor || exit $?
-brew update
+brew update || exit $?
 echo
 echo "✅  2/5 Homebrew is ready."
 echo
@@ -46,8 +45,6 @@ echo "✅  4/5 Ansible is ready."
 echo
 
 # Clone the repo
-git clone https://github.com/Synodra/ansible-osx-setup.git
-
 if ! (git clone https://github.com/Synodra/ansible-osx-setup.git) then
     echo
     echo "⚠️ Git clone aborted! Repo may have already been cloned."

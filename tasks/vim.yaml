@@ -35,7 +35,7 @@
 # Install plugins with vim plugs
 - name: Perform the plugins installation with PlugInstall
   become: false
-  shell: "vim -e -i NONE -c 'PlugInstall' -c 'PlugClean' -c 'qa'"
+  shell: "vim -e -i NONE -c 'PlugInstall' -c 'qa'"
   ignore_errors: true
   when: vim_autoload_details.stat.exists
 

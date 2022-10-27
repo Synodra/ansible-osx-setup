@@ -59,3 +59,7 @@ ansible-vault encrypt ssh-key-name
 
 In order to test this script, you'll need to create a macOS VM and run the script. Follow this tuto to create a MacOS VM: [How to create a Mac OS VM](https://github.com/geerlingguy/macos-virtualbox-vm)
 You can also use ansible test tool to verify that ansible script is executables with the `--check` command.
+
+## Known issues
+
+- Vim throws and error at the launch & no plugin are active : Perform a `:PlugInstall` to launch the installation of all the plugins in the vimrc and plug file. It happens that the command in the vim tasks script didn't work.
