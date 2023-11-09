@@ -82,6 +82,7 @@ plugins=(
   zsh-syntax-highlighting
   zsh-completions
   git
+  ssh-agent
   tmux
   virtualenv
 )
